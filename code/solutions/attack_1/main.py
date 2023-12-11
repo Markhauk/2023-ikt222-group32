@@ -1,7 +1,10 @@
 import string
 #https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+
+username = "jonas.dahl"
 
 webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 searchterm = "YourUsername"  # Edit the username
@@ -13,6 +16,7 @@ chrome_driver_path = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 driver = webdriver.Chrome()
 driver.get(webpage)
 
+driver.find_element(By.NAME, "username" ).send_keys(username)
 # Wait for user input before closing the browser
 input("Press Enter to close the browser...")
 
@@ -32,7 +36,7 @@ driver.quit()
 
 
 
-username = "jonas.dahl"
+
 
 passwordguess = ""
 
