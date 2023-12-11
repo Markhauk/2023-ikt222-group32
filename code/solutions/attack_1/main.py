@@ -6,6 +6,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 username = "jonas.dahl"
 
+passwordguess = ""
+
+passwordlenght = 17
+
+allcharacters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+
 webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 searchterm = "YourUsername"  # Edit the username
 
@@ -16,7 +22,14 @@ chrome_driver_path = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 driver = webdriver.Chrome()
 driver.get(webpage)
 
-driver.find_element(By.NAME, "username" ).send_keys(username)
+driver.find_element(By.NAME, "username").send_keys(username)
+
+passwordguess = "qwertyuioplkjhgfd"
+
+driver.find_element(By.NAME, "password").send_keys(passwordguess)
+
+driver.find_element(By.CLASS_NAME, "btn-primary").click()
+
 # Wait for user input before closing the browser
 input("Press Enter to close the browser...")
 
@@ -30,22 +43,6 @@ driver.quit()
 # Input the search term and submit the form
 #sbox.send_keys(searchterm)
 #submit.click()
-
-# Close the WebDriver after use
-#driver.quit()
-
-
-
-
-
-passwordguess = ""
-
-passwordlenght = 17
-
-allcharacters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
-
-
-
 
 
 print(username)
