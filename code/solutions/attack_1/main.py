@@ -1,4 +1,4 @@
-#https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
+# https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -6,11 +6,12 @@ import re
 
 username = "jonas.dahl"
 
-passwordguess = ""
+password_guess = ""
 
-passwordlenght = 17
+password_length = 17
 
-allcharacters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+all_characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+
 
 def extract_numbers(input_string):
     # Define a regular expression pattern to match numbers
@@ -21,11 +22,13 @@ def extract_numbers(input_string):
 
     return numbers
 
+
 def fill_password(input_string):
-    correct_length = passwordlenght-len(input_string)
-    input_string =  input_string + correct_length * '-'
+    correct_length = password_length - len(input_string)
+    input_string = input_string + correct_length * '-'
 
     return input_string
+
 
 webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 
@@ -38,9 +41,9 @@ driver.get(webpage)
 
 driver.find_element(By.NAME, "username").send_keys(username)
 
-passwordguess = "Kwertyuioplkjhgfd"
+password_guess = "Kwertyuioplkjhgfd"
 
-driver.find_element(By.NAME, "password").send_keys(passwordguess)
+driver.find_element(By.NAME, "password").send_keys(password_guess)
 
 driver.find_element(By.CLASS_NAME, "btn-primary").click()
 time.sleep(0.5)
@@ -60,12 +63,3 @@ input("Press Enter to close the browser...")
 
 # Close the browser window
 driver.quit()
-
-
-
-
-
-
-
-
-
