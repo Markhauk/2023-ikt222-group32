@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import re
 
 username = "jonas.dahl"
 
@@ -10,6 +11,15 @@ passwordguess = ""
 passwordlenght = 17
 
 allcharacters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+
+def extract_numbers(input_string):
+    # Define a regular expression pattern to match numbers
+    pattern = r'\d+'
+
+    # Use re.findall to find all matches of the pattern in the input string
+    numbers = re.findall(pattern, input_string)
+
+    return numbers
 
 webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 
@@ -35,7 +45,7 @@ response_message_element = driver.find_element(By.ID, "responseMessage")
 response_message_text = response_message_element.text
 
 # Print or use the collected text as needed
-print("Collected text:", response_message_text)
+print("Collected number:", extract_numbers(response_message_text))
 
 # Wait for user input before closing the browser
 input("Press Enter to close the browser...")
