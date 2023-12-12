@@ -1,6 +1,7 @@
 #https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
 
 username = "jonas.dahl"
 
@@ -21,15 +22,13 @@ driver.get(webpage)
 
 driver.find_element(By.NAME, "username").send_keys(username)
 
-passwordguess = "qwertyuioplkjhgfd"
+passwordguess = "Kwertyuioplkjhgfd"
 
 driver.find_element(By.NAME, "password").send_keys(passwordguess)
 
 driver.find_element(By.CLASS_NAME, "btn-primary").click()
+time.sleep(0.5)
 
-# Replace 'your_element_locator' with the appropriate locator for your element
-# For example, if you want to collect text from a <p> element, you might use By.TAG_NAME and 'p'
-# Use By.ID to find the element by its id attribute
 response_message_element = driver.find_element(By.ID, "responseMessage")
 
 # Get the text content of the element
@@ -44,7 +43,6 @@ input("Press Enter to close the browser...")
 # Close the browser window
 driver.quit()
 
-print(username)
 
 
 
