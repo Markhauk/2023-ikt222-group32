@@ -21,6 +21,12 @@ def extract_numbers(input_string):
 
     return numbers
 
+def fill_password(input_string):
+    correct_length = passwordlenght-len(input_string)
+    input_string =  input_string + correct_length * '-'
+
+    return input_string
+
 webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 
 # Ensure you have the correct path to your ChromeDriver executable
@@ -47,11 +53,15 @@ response_message_text = response_message_element.text
 # Print or use the collected text as needed
 print("Collected number:", extract_numbers(response_message_text))
 
+print(fill_password("aa"))
+
 # Wait for user input before closing the browser
 input("Press Enter to close the browser...")
 
 # Close the browser window
 driver.quit()
+
+
 
 
 
