@@ -10,6 +10,7 @@ password_guess = ""
 
 password_length = 17
 
+
 def extract_numbers(input_string):
     # Define a regular expression pattern to match numbers
     pattern = r'\d+'
@@ -21,6 +22,7 @@ def extract_numbers(input_string):
         return match.group()
     else:
         return None
+
 
 def fill_password(input_string):
     correct_length = password_length - len(input_string)
@@ -43,7 +45,6 @@ def print_characters():
         # Get the text content of the element
         response_message_text = response_message_element.text
 
-
         if extract_numbers(response_message_text) == '2':
             exit('jippi')
 
@@ -56,6 +57,7 @@ def print_characters():
 
         driver.find_element(By.CLASS_NAME, "btn-primary").click()
         time.sleep(0.1)
+
 
 webpage = "https://portal.regjeringen.uiaikt.no/"  # Edit the URL
 
