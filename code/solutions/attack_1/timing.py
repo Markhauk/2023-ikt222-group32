@@ -1,17 +1,8 @@
-# https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
 
-def get_password_length(username: str, webpage: str, max_tries: int, delay: float) -> int:
-    # Ensure you have the correct path to your ChromeDriver executable
-    chrome_driver_path = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-
-    # Set up the Chrome WebDriver
-    driver = webdriver.Chrome()
-    driver.get(webpage)
-
+def get_password_length(driver, username: str, max_tries: int, delay: float) -> int:
     password_guess = ""
     password_length = 0
 
@@ -42,8 +33,5 @@ def get_password_length(username: str, webpage: str, max_tries: int, delay: floa
             print("Password length found!")
             password_length = i
             break
-
-    # Close the browser window
-    driver.quit()
 
     return password_length
