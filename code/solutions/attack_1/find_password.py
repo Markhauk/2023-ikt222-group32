@@ -41,7 +41,14 @@ def find_password(driver, username: str, password_length: int):
 
         except selenium.common.NoSuchElementException:
             password_guessed += tmp_character
-            print("Most likely found password: " + fill_password(password_guessed, password_length))
+
+            missing_characters = password_length - len(password_guessed)
+            if missing_characters == 0:
+                print("Found password: " + password_guessed)
+            else:
+                print("Found part of password: " + password_guessed)
+                print("Missing " + str(missing_characters) + " character" +
+                      ("s" if missing_characters is not 1 else "") + ".")
             break
 
 
