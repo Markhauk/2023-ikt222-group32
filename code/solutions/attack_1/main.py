@@ -34,13 +34,16 @@ def fill_password(input_string):
 
 
 def print_characters(right_guessed):
-    all_characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+    all_characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ1234567890!#¤%&/()=?+'*-._.:,;|§<>"
     length = 2
     password_guessed = ""
     password_guess = ""
-    # Get the text content of the element
 
     while True:
+        response_message_element = driver.find_element(By.ID, "responseMessage")
+        response_message_text = response_message_element.text
+        if int(extract_numbers(response_message_text)) == password_length:
+            break
         for character in all_characters:
             password_guess = password_guessed + character
             print(fill_password(password_guess))
@@ -51,7 +54,6 @@ def print_characters(right_guessed):
             time.sleep(0.1)
 
             response_message_element = driver.find_element(By.ID, "responseMessage")
-            # Get the text content of the element
             response_message_text = response_message_element.text
 
             if int(extract_numbers(response_message_text)) == length:
