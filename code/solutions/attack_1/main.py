@@ -1,4 +1,6 @@
 # https://stackoverflow.com/questions/13166395/fill-input-of-type-text-and-press-submit-using-python
+import string
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -34,7 +36,7 @@ def fill_password(input_string):
 
 
 def print_characters(right_guessed):
-    all_characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ1234567890!#¤%&/()=?+'*-._.:,;|§<>"
+    all_characters = string.printable
     length = 2
     password_guessed = ""
     password_guess = ""
